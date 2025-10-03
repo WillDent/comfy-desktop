@@ -107,6 +107,15 @@ graph TD
 - Build scripts (`yarn make`, `electron-builder`, `todesktop build`) provide consistent packaging entry points for NSIS, DMG, and AppImage artifacts, and can run in CI to produce signed installers per platform.【F:package.json†L24-L71】
 - Logs from the main process and Python server rotate automatically and live alongside user data, simplifying support and telemetry correlation across OSs.【F:src/main.ts†L46-L48】【F:src/main-process/comfyServer.ts†L136-L194】【F:README.md†L83-L90】
 
+### Reference Template Project
+
+For a stripped-down example that demonstrates how to wire an Electron app to a persistent Python worker, see [`templates/electron-python-bridge`](../templates/electron-python-bridge/README.md). The template includes:
+
+- An Electron main process (`main.js`) that spawns a Python backend, forwards renderer IPC calls, and relays responses over JSON lines.【F:templates/electron-python-bridge/main.js†L1-L117】
+- A preload/renderer pair that exposes a safe `window.pythonBridge.invoke` helper and renders Python responses in the UI.【F:templates/electron-python-bridge/preload.js†L1-L5】【F:templates/electron-python-bridge/renderer.js†L1-L18】
+- A minimal Python backend that reads requests from `stdin`, performs placeholder AI inference, and writes structured results to `stdout`, making it easy to swap in real ML logic.【F:templates/electron-python-bridge/python/backend.py†L1-L55】
+- Documentation describing how to run and extend the sample, so teams can bootstrap new cross-language projects quickly.【F:templates/electron-python-bridge/README.md†L1-L84】
+
 ## 7. Applying These Patterns to Your App
 
 To replicate this approach in your own Electron + Python AI desktop application:

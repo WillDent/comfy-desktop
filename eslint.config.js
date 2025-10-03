@@ -6,7 +6,7 @@ import tseslint from 'typescript-eslint';
 export default tseslint.config(
   // Baseline include / exclude
   { files: ['**/*.{js,cjs,mjs,ts,mts}'] },
-  { ignores: ['dist/**/*', 'jest.config.cjs', 'scripts/shims/**/*'] },
+  { ignores: ['dist/**/*', 'jest.config.cjs', 'scripts/shims/**/*', 'templates/**/*'] },
 
   // Baseline
   eslint.configs.recommended,
